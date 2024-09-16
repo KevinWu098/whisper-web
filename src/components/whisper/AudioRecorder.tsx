@@ -36,7 +36,7 @@ export default function AudioRecorder(props: {
     // Reset recording (if any)
     setRecordedBlob(null);
 
-    let startTime = Date.now();
+    const startTime = Date.now();
 
     try {
       if (!streamRef.current) {
@@ -91,7 +91,7 @@ export default function AudioRecorder(props: {
   };
 
   useEffect(() => {
-    let stream: MediaStream | null = null;
+    const stream: MediaStream | null = null;
 
     if (recording) {
       const timer = setInterval(() => {
@@ -135,11 +135,7 @@ export default function AudioRecorder(props: {
       </button>
 
       {recordedBlob && (
-        <audio
-          className="w-full"
-          ref={audioRef}
-          controls
-        >
+        <audio className="w-full" ref={audioRef} controls>
           <source
             src={URL.createObjectURL(recordedBlob)}
             type={recordedBlob.type}

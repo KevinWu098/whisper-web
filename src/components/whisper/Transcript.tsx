@@ -2,10 +2,9 @@
 
 import { useEffect, useRef } from "react";
 
-import { cn } from "@/lib/utils";
-
 import { TranscriberData } from "./hooks/useTranscriber";
 import { formatAudioTimestamp } from "./utils/AudioUtils";
+import { cn } from "@/lib/utils";
 
 interface Props {
   transcribedData: TranscriberData | undefined;
@@ -14,34 +13,34 @@ interface Props {
 export default function Transcript({ transcribedData }: Props) {
   const divRef = useRef<HTMLDivElement>(null);
 
-  const saveBlob = (blob: Blob, filename: string) => {
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = filename;
-    link.click();
-    URL.revokeObjectURL(url);
-  };
-  const exportTXT = () => {
-    let chunks = transcribedData?.chunks ?? [];
-    let text = chunks
-      .map((chunk) => chunk.text)
-      .join("")
-      .trim();
+  // const saveBlob = (blob: Blob, filename: string) => {
+  //   const url = URL.createObjectURL(blob);
+  //   const link = document.createElement("a");
+  //   link.href = url;
+  //   link.download = filename;
+  //   link.click();
+  //   URL.revokeObjectURL(url);
+  // };
+  // const exportTXT = () => {
+  //   let chunks = transcribedData?.chunks ?? [];
+  //   let text = chunks
+  //     .map((chunk) => chunk.text)
+  //     .join("")
+  //     .trim();
 
-    const blob = new Blob([text], { type: "text/plain" });
-    saveBlob(blob, "transcript.txt");
-  };
-  const exportJSON = () => {
-    let jsonData = JSON.stringify(transcribedData?.chunks ?? [], null, 2);
+  //   const blob = new Blob([text], { type: "text/plain" });
+  //   saveBlob(blob, "transcript.txt");
+  // };
+  // const exportJSON = () => {
+  //   let jsonData = JSON.stringify(transcribedData?.chunks ?? [], null, 2);
 
-    // post-process the JSON to make it more readable
-    const regex = /(    "timestamp": )\[\s+(\S+)\s+(\S+)\s+\]/gm;
-    jsonData = jsonData.replace(regex, "$1[$2 $3]");
+  //   // post-process the JSON to make it more readable
+  //   const regex = /(    "timestamp": )\[\s+(\S+)\s+(\S+)\s+\]/gm;
+  //   jsonData = jsonData.replace(regex, "$1[$2 $3]");
 
-    const blob = new Blob([jsonData], { type: "application/json" });
-    saveBlob(blob, "transcript.json");
-  };
+  //   const blob = new Blob([jsonData], { type: "application/json" });
+  //   saveBlob(blob, "transcript.json");
+  // };
 
   // Scroll to the bottom when the component updates
   useEffect(() => {
@@ -49,7 +48,7 @@ export default function Transcript({ transcribedData }: Props) {
       const diff = Math.abs(
         divRef.current.offsetHeight +
           divRef.current.scrollTop -
-          divRef.current.scrollHeight
+          divRef.current.scrollHeight,
       );
 
       if (diff <= 64) {
@@ -64,7 +63,7 @@ export default function Transcript({ transcribedData }: Props) {
       ref={divRef}
       className={cn(
         "my-2 flex max-h-[20rem] w-full flex-col overflow-y-auto p-4",
-        !(transcribedData?.chunks?.length ?? 0 > 0) && "hidden"
+        !(transcribedData?.chunks?.length ?? 0 > 0) && "hidden",
       )}
     >
       {transcribedData?.chunks &&

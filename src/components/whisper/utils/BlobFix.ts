@@ -339,6 +339,7 @@ class WebmFloat extends WebmBase<number> {
 interface ContainerData {
   id: number;
   idHex?: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   data: WebmBase<any>;
 }
 
@@ -378,6 +379,8 @@ class WebmContainer extends WebmBase<ContainerData[]> {
       const data = this.source!.slice(this.offset, end);
 
       const info = sections[id] || { name: "Unknown", type: "Unknown" };
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       let ctr: any = WebmBase;
       switch (info.type) {
         case "Container":
@@ -401,6 +404,7 @@ class WebmContainer extends WebmBase<ContainerData[]> {
   }
   writeUint(x: number, draft = false) {
     for (
+      // eslint-disable-next-line no-var
       var bytes = 1, flag = 0x80;
       x >= flag && bytes < 8;
       bytes++, flag *= 0x80

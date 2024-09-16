@@ -23,7 +23,7 @@ function mobileTabletCheck() {
   // return check;
 }
 const isMobileOrTablet = mobileTabletCheck();
-export default {
+const defaults = {
   SAMPLING_RATE: 16000,
   DEFAULT_AUDIO_URL: `https://huggingface.co/datasets/Xenova/transformers.js-docs/resolve/main/${
     isMobileOrTablet ? "jfk" : "ted_60_16k"
@@ -34,3 +34,5 @@ export default {
   DEFAULT_QUANTIZED: isMobileOrTablet,
   DEFAULT_MULTILINGUAL: false,
 };
+
+export default defaults;

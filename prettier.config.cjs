@@ -22,7 +22,7 @@ const config = {
   importOrder: [
     "^(react/(.*)$)|^(react$)|^(react-dom$)|^(react-dom/(.*)$)",
     "",
-    "^(@chakra-ui/(.*)$)",
+    "^@/(.*)$",
     "",
     "<THIRD_PARTY_MODULES>",
     "",

@@ -4,7 +4,7 @@
  * @example whisper-web/src/whisper-worker.js
  */
 
-import { pipeline, env } from "@xenova/transformers";
+import { env, pipeline } from "@xenova/transformers";
 
 // Disable local models
 env.allowLocalModels = false;
@@ -51,7 +51,7 @@ self.addEventListener("message", async (event) => {
     message.multilingual,
     message.quantized,
     message.subtask,
-    message.language,
+    message.language
   );
   if (transcript === null) return;
 
@@ -75,7 +75,7 @@ const transcribe = async (
   multilingual,
   quantized,
   subtask,
-  language,
+  language
 ) => {
   const isDistilWhisper = model.startsWith("distil-whisper/");
 

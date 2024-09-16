@@ -9,6 +9,6 @@ export function formatAudioTimestamp(time: number) {
   time -= minutes * 60;
   const seconds = time | 0;
   return `${hours ? padTime(hours) + ":" : ""}${padTime(minutes)}:${padTime(
-    seconds,
+    seconds
   )}`;
 }

@@ -152,7 +152,7 @@ export function AudioManager(props: {
     | undefined
   >(undefined);
   const [audioDownloadUrl, setAudioDownloadUrl] = useState<string | undefined>(
-    undefined,
+    undefined
   );
 
   const isAudioLoading = progress !== undefined;
@@ -202,7 +202,7 @@ export function AudioManager(props: {
   };
 
   const downloadAudioFromUrl = async (
-    requestAbortController: AbortController,
+    requestAbortController: AbortController
   ) => {
     if (audioDownloadUrl) {
       try {
@@ -286,7 +286,10 @@ export function AudioManager(props: {
     <div className="z-10 flex flex-col gap-y-4">
       {audioData && audioData.buffer && (
         <div className="flex flex-col gap-0 text-base">
-          <AudioPlayer audioUrl={audioData.url} mimeType={audioData.mimeType} />
+          <AudioPlayer
+            audioUrl={audioData.url}
+            mimeType={audioData.mimeType}
+          />
 
           <div className="relative flex w-full items-center justify-center">
             <TranscribeButton
@@ -319,7 +322,10 @@ export function AudioManager(props: {
               <label>Loading model files... (only run once)</label>
               {props.transcriber.progressItems.map((data) => (
                 <div key={data.file}>
-                  <Progress text={data.file} percentage={data.progress} />
+                  <Progress
+                    text={data.file}
+                    percentage={data.progress}
+                  />
                 </div>
               ))}
             </div>
@@ -397,7 +403,10 @@ function SettingsTile(props: {
 
   return (
     <div className={props.className}>
-      <Tile icon={props.icon} onClick={onClick} />
+      <Tile
+        icon={props.icon}
+        onClick={onClick}
+      />
       <SettingsModal
         show={showModal}
         onSubmit={onSubmit}
@@ -446,15 +455,18 @@ function SettingsModal(props: {
                 (key) =>
                   props.transcriber.quantized ||
                   // @ts-expect-error trust me bro
-                  models[key].length == 2,
+                  models[key].length == 2
               )
               .filter(
                 (key) =>
                   !props.transcriber.multilingual ||
-                  !key.startsWith("distil-whisper/"),
+                  !key.startsWith("distil-whisper/")
               )
               .map((key) => (
-                <option key={key} value={key}>{`${key}${
+                <option
+                  key={key}
+                  value={key}
+                >{`${key}${
                   props.transcriber.multilingual ||
                   key.startsWith("distil-whisper/")
                     ? ""
@@ -475,7 +487,10 @@ function SettingsModal(props: {
                   props.transcriber.setMultilingual(e.target.checked);
                 }}
               ></input>
-              <label htmlFor={"multilingual"} className="ms-1">
+              <label
+                htmlFor={"multilingual"}
+                className="ms-1"
+              >
                 Multilingual
               </label>
             </div>
@@ -488,7 +503,10 @@ function SettingsModal(props: {
                   props.transcriber.setQuantized(e.target.checked);
                 }}
               ></input>
-              <label htmlFor={"quantize"} className="ms-1">
+              <label
+                htmlFor={"quantize"}
+                className="ms-1"
+              >
                 Quantized
               </label>
             </div>
@@ -504,7 +522,10 @@ function SettingsModal(props: {
                 }}
               >
                 {Object.keys(LANGUAGES).map((key, i) => (
-                  <option key={key} value={key}>
+                  <option
+                    key={key}
+                    value={key}
+                  >
                     {names[i]}
                   </option>
                 ))}
@@ -571,8 +592,16 @@ function UrlTile(props: {
 
   return (
     <div className="w-full rounded-lg hover:bg-[#f5f5f4]">
-      <Tile icon={props.icon} text={props.text} onClick={onClick} />
-      <UrlModal show={showModal} onSubmit={onSubmit} onClose={onClose} />
+      <Tile
+        icon={props.icon}
+        text={props.text}
+        onClick={onClick}
+      />
+      <UrlModal
+        show={showModal}
+        onSubmit={onSubmit}
+        onClose={onClose}
+      />
     </div>
   );
 }
@@ -599,7 +628,10 @@ function UrlModal(props: {
       content={
         <>
           {"Enter the URL of the audio file you want to load."}
-          <UrlInput onChange={onChange} value={url} />
+          <UrlInput
+            onChange={onChange}
+            value={url}
+          />
         </>
       }
       onClose={props.onClose}
@@ -615,7 +647,7 @@ function FileTile(props: {
   onFileUpdate: (
     decoded: AudioBuffer,
     blobUrl: string,
-    mimeType: string,
+    mimeType: string
   ) => void;
 }) {
   // const audioPlayer = useRef<HTMLAudioElement>(null);
@@ -653,7 +685,11 @@ function FileTile(props: {
 
   return (
     <div className="w-full rounded-lg hover:bg-[#f5f5f4]">
-      <Tile icon={props.icon} text={props.text} onClick={() => elem.click()} />
+      <Tile
+        icon={props.icon}
+        text={props.text}
+        onClick={() => elem.click()}
+      />
     </div>
   );
 }
@@ -682,8 +718,16 @@ function RecordTile(props: {
 
   return (
     <div className="z-[10000] size-full border-b-2 border-b-primary hover:bg-[#f5f5f4]">
-      <Tile icon={props.icon} text={props.text} onClick={onClick} />
-      <RecordModal show={showModal} onSubmit={onSubmit} onClose={onClose} />
+      <Tile
+        icon={props.icon}
+        text={props.text}
+        onClick={onClick}
+      />
+      <RecordModal
+        show={showModal}
+        onSubmit={onSubmit}
+        onClose={onClose}
+      />
     </div>
   );
 }

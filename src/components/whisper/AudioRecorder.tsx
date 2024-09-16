@@ -135,7 +135,11 @@ export default function AudioRecorder(props: {
       </button>
 
       {recordedBlob && (
-        <audio className="w-full" ref={audioRef} controls>
+        <audio
+          className="w-full"
+          ref={audioRef}
+          controls
+        >
           <source
             src={URL.createObjectURL(recordedBlob)}
             type={recordedBlob.type}

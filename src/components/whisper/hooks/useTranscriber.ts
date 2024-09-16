@@ -1,6 +1,7 @@
 import { useCallback, useMemo, useState } from "react";
-import { useWorker } from "./useWorker";
+
 import Constants from "../utils/Constants";
+import { useWorker } from "./useWorker";
 
 interface ProgressItem {
   file: string;
@@ -53,7 +54,7 @@ export interface Transcriber {
 
 export function useTranscriber(): Transcriber {
   const [transcript, setTranscript] = useState<TranscriberData | undefined>(
-    undefined,
+    undefined
   );
   const [isBusy, setIsBusy] = useState(false);
   const [isModelLoading, setIsModelLoading] = useState(false);
@@ -72,7 +73,7 @@ export function useTranscriber(): Transcriber {
               return { ...item, progress: message.progress };
             }
             return item;
-          }),
+          })
         );
         break;
       case "update":
@@ -110,13 +111,13 @@ export function useTranscriber(): Transcriber {
       case "error":
         setIsBusy(false);
         alert(
-          `${message.data.message} This is most likely because you are using Safari on an M1/M2 Mac. Please try again from Chrome, Firefox, or Edge.\n\nIf this is not the case, please file a bug report.`,
+          `${message.data.message} This is most likely because you are using Safari on an M1/M2 Mac. Please try again from Chrome, Firefox, or Edge.\n\nIf this is not the case, please file a bug report.`
         );
         break;
       case "done":
         // Model file loaded: remove the progress item from the list.
         setProgressItems((prev) =>
-          prev.filter((item) => item.file !== message.file),
+          prev.filter((item) => item.file !== message.file)
         );
         break;
 
@@ -129,10 +130,10 @@ export function useTranscriber(): Transcriber {
   const [model, setModel] = useState<string>(Constants.DEFAULT_MODEL);
   const [subtask, setSubtask] = useState<string>(Constants.DEFAULT_SUBTASK);
   const [quantized, setQuantized] = useState<boolean>(
-    Constants.DEFAULT_QUANTIZED,
+    Constants.DEFAULT_QUANTIZED
   );
   const [multilingual, setMultilingual] = useState<boolean>(
-    Constants.DEFAULT_MULTILINGUAL,
+    Constants.DEFAULT_MULTILINGUAL
   );
   const [language, setLanguage] = useState<string>(Constants.DEFAULT_LANGUAGE);
 
@@ -174,7 +175,7 @@ export function useTranscriber(): Transcriber {
         });
       }
     },
-    [webWorker, model, multilingual, quantized, subtask, language],
+    [webWorker, model, multilingual, quantized, subtask, language]
   );
 
   const transcriber = useMemo(() => {

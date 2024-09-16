@@ -252,7 +252,7 @@ class WebmBase<T> {
 
   constructor(
     private name = "Unknown",
-    private type = "Unknown",
+    private type = "Unknown"
   ) {}
 
   updateBySource() {}
@@ -472,7 +472,7 @@ class WebmFile extends WebmContainer {
     }
 
     const infoSection = segmentSection.getSectionById(
-      0x549a966,
+      0x549a966
     ) as WebmContainer;
     if (!infoSection) {
       return false;
@@ -524,7 +524,7 @@ class WebmFile extends WebmContainer {
 export const webmFixDuration = (
   blob: Blob,
   duration: number,
-  type = "video/webm",
+  type = "video/webm"
 ): Promise<Blob> => {
   return new Promise((resolve, reject) => {
     try {

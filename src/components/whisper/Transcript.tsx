@@ -2,9 +2,10 @@
 
 import { useEffect, useRef } from "react";
 
+import { cn } from "@/lib/utils";
+
 import { TranscriberData } from "./hooks/useTranscriber";
 import { formatAudioTimestamp } from "./utils/AudioUtils";
-import { cn } from "@/lib/utils";
 
 interface Props {
   transcribedData: TranscriberData | undefined;
@@ -48,7 +49,7 @@ export default function Transcript({ transcribedData }: Props) {
       const diff = Math.abs(
         divRef.current.offsetHeight +
           divRef.current.scrollTop -
-          divRef.current.scrollHeight,
+          divRef.current.scrollHeight
       );
 
       if (diff <= 64) {
@@ -63,7 +64,7 @@ export default function Transcript({ transcribedData }: Props) {
       ref={divRef}
       className={cn(
         "my-2 flex max-h-[20rem] w-full flex-col overflow-y-auto p-4",
-        !(transcribedData?.chunks?.length ?? 0 > 0) && "hidden",
+        !(transcribedData?.chunks?.length ?? 0 > 0) && "hidden"
       )}
     >
       {transcribedData?.chunks &&
